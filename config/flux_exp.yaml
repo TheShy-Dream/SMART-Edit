@@ -1,0 +1,250 @@
+model:
+  path: black-forest-labs/FLUX.1-dev/
+general:
+  device: cuda
+  logging_verbosity: error
+methods:
+  dna_edit:
+    pipeline: DNAEditFluxPipeline
+    parameters:
+      source_guidance_scale: 1.0
+      target_guidance_scale: 2.5
+      start_timestep: 4
+      num_inference_steps: 28
+      add_processor: false
+  fireflow_edit:
+    pipeline: FireFlowEditFluxPipeline
+    parameters:
+      inject_step: 1
+      guidance_scale: 2.5
+      num_inference_steps: 8
+      with_second_order: true
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  rf_inversion:
+    pipeline: RFInversionEditFluxPipeline
+    parameters:
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      stop_timestep: 0.35
+      gamma: 0.9
+      add_processor: false
+  rf_solver:
+    pipeline: RFSolverEditFluxPipeline
+    parameters:
+      inject_step: 2
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      with_second_order: true
+      add_processor:
+        filter_name: single_transformer_blocks
+        before_layer: 37
+  flow_edit:
+    pipeline: FlowEditFluxPipeline
+    parameters:
+      source_guidance_scale: 1.0
+      target_guidance_scale: 2.5
+      interpolate_start_step: 0
+      interpolate_end_step: 24
+      num_inference_steps: 28
+      add_processor: false
+  ft_edit:
+    pipeline: FTEditFluxPipeline
+    parameters:
+      guidance_scale: 2.5
+      ly_ratio: 1.0
+      num_inference_steps: 25
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+      controller:
+        type: FluxAttentionReplace
+        prompts:
+        - ''
+        num_steps: 25
+        attn_ratio: 0.15
+        num_att_layers: 38
+  rf_flow_vanilla:
+    pipeline: RFVanillaFluxPipeline
+    parameters:
+      inject_step: 2
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  fia_edit:
+    pipeline: RFFIAEditFluxPipeline
+    parameters:
+      inject_step: 0
+      noise_coeff:
+      - 1.0
+      - 0
+      - 0
+      scale_coeff: 0.9
+      offset_coeff: 0.8
+      num_inference_steps: 10
+      num_average_steps: 1
+      source_guidance_scale: 1.0
+      target_guidance_scale: 2.5
+      interpolate_start_step: 0
+      interpolate_end_step: 8
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  fsi_edit:
+    pipeline: RFFSIEditFluxPipeline
+    parameters:
+      inject_step: 2
+      noise_coeff:
+      - 0.1
+      - 0.1
+      - 0.8
+      scale_coeff: 0.3
+      smooth_coeff: 0.999
+      guidance_scale: 2.5
+      num_inference_steps: 10
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit:
+    pipeline: SMART_EditEditFluxPipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      source_guidance_scale: 1.0
+      target_guidance_scale: 2.5
+      interpolate_start_step: 0
+      interpolate_end_step: 24
+      num_average_steps: 1
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit_dna:
+    pipeline: SMART_EditDNAEditFluxPipeline
+    parameters:
+      source_guidance_scale: 1.0
+      target_guidance_scale: 2.5
+      start_timestep: 4
+      inject_step: 4
+      token_indices: 2
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit_fireflow:
+    pipeline: SMART_EditFireFlowEditFluxPipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      with_second_order: true
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit_rf_solver:
+    pipeline: SMART_EditRFSolverEditFluxPipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      with_second_order: true
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit_rf_inversion:
+    pipeline: SMART_EditRFInversionEditFluxPipeline
+    parameters:
+      inject_step: 4
+      start_timestep: 0
+      stop_timestep: 0.35
+      gamma: 0.9
+      token_indices: 2
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit_vanilla:
+    pipeline: SMART_EditVanillaFluxPipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit_ft:
+    pipeline: SMART_EditFTEditFluxPipeline
+    parameters:
+      num_inference_steps: 28
+      fixed_point_steps: 1
+      skip_steps: 0
+      ly_ratio: 1.0
+      token_indices: 2
+      guidance_scale: 2.5
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+      controller:
+        type: FluxAttentionReplace
+        prompts:
+        - ''
+        num_steps: 28
+        attn_ratio: 0.15
+        num_att_layers: 38
+  smart_edit_fia:
+    pipeline: SMART_EditFIAEditFluxPipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      noise_coeff:
+      - 1.0
+      - 0
+      - 0
+      scale_coeff: 0.9
+      offset_coeff: 0.8
+      num_inference_steps: 28
+      num_average_steps: 1
+      source_guidance_scale: 1.0
+      target_guidance_scale: 2.5
+      interpolate_start_step: 0
+      interpolate_end_step: 22
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks
+  smart_edit_fsi:
+    pipeline: SMART_EditFSIEditFluxPipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      noise_coeff:
+      - 0.1
+      - 0.1
+      - 0.8
+      scale_coeff: 0.3
+      smooth_coeff: 0.999
+      guidance_scale: 2.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 0
+        before_layer: 37
+        filter_name: single_transformer_blocks

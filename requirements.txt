@@ -1,0 +1,10 @@
+accelerate==1.10.1
+diffusers==0.35.1
+protobuf==6.31.1
+sentencepiece==0.2.0
+torch==2.8.0 --extra-index-url https://download.pytorch.org/whl/cu126
+torchvision==0.23.0 --extra-index-url https://download.pytorch.org/whl/cu126
+transformers==4.56.0
+pyyaml
+pillow
+numpy

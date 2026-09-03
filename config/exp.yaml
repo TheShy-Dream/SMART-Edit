@@ -1,0 +1,43 @@
+# Experiment Configuration
+# Basic configuration for datasets, model selection and methods
+
+# Dataset configurations
+datasets:
+  pie_bench:
+    name: "PIE-Bench"
+    # Replace this with your PIE-Bench dataset path
+    data_root: "path/to/PIE-Bench_v1/"
+    description: "PIE-Bench dataset for image editing"
+    edit_category_list: ["0","1","2","3","4","5","6","7","8","9"]  # the editing category that needed to run
+    mapping_file: "mapping_file.json"
+
+# Model selection
+base_model: "sd35"  # or "flux" based on which config to use
+
+# Methods to use (from available methods in config files)
+# 支持的method: ["rf_solver", "dna_edit", "fireflow_edit", "rf_inversion", "flow_edit", "ft_edit", "multi_turn_edit","rf_flow_vanilla", "fia_edit", "fsi_edit", "smart_edit", "smart_edit_dna", "smart_edit_fireflow", "smart_edit_rf_solver", "smart_edit_rf_inversion", "smart_edit_vanilla", "smart_edit_ft", "smart_edit_fia", "smart_edit_fsi"]
+# - rf_solver: RF Solver method
+# - dna_edit: DNA Edit method
+# - fireflow_edit: FireFlow Edit method
+# - rf_inversion: RF Inversion method
+# - flow_edit: Flow Edit method
+# - ft_edit: Feature Transfer Edit method
+# - multi_turn_edit: Multi-turn Edit method
+# - rf_flow_vanilla: RF Flow Vanilla method
+# - fia_edit: Feature Injection Attention (FIA) method
+# - fsi_edit: Feature Space Injection (FSI) method
+# - smart_edit: SMART-Edit base (flow-style) method
+# - smart_edit_dna: SMART-Edit DNA Edit method
+# - smart_edit_fireflow: SMART-Edit FireFlow method
+# - smart_edit_rf_solver: SMART-Edit RF Solver method
+# - smart_edit_rf_inversion: SMART-Edit RF Inversion method
+# - smart_edit_vanilla: SMART-Edit Vanilla method
+# - smart_edit_ft: SMART-Edit Feature Transfer method
+# - smart_edit_fia: SMART-Edit Feature Injection Attention (FIA) method
+# - smart_edit_fsi: SMART-Edit Feature Space Injection (FSI) method
+method: "rf_inversion"
+
+# Experiment settings
+experiment:
+  output_dir: "output"
+  batch_size: 1

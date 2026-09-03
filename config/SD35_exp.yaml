@@ -1,0 +1,254 @@
+model:
+  path: stabilityai/stable-diffusion-3.5-medium/
+general:
+  device: cuda
+  logging_verbosity: error
+methods:
+  dna_edit:
+    pipeline: DNAEditSD35Pipeline
+    parameters:
+      source_guidance_scale: 1.0
+      target_guidance_scale: 3.5
+      start_timestep: 13
+      num_inference_steps: 40
+      add_processor: false
+  fireflow_edit:
+    pipeline: FireFlowEditSD35Pipeline
+    parameters:
+      inject_step: 1
+      guidance_scale: 3.5
+      num_inference_steps: 8
+      with_second_order: true
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  rf_inversion:
+    pipeline: RFInversionEditSD35Pipeline
+    parameters:
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      stop_timestep: 0.35
+      gamma: 0.9
+      add_processor: false
+  rf_solver:
+    pipeline: RFSolverEditSD35Pipeline
+    parameters:
+      inject_step: 2
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      with_second_order: true
+      add_processor:
+        after_layer: 17
+        filter_name: attn
+  flow_edit:
+    pipeline: FlowEditSD35Pipeline
+    model_path: stabilityai/stable-diffusion-3-medium
+    parameters:
+      source_guidance_scale: 1.0
+      target_guidance_scale: 3.5
+      interpolate_start_step: 0
+      interpolate_end_step: 24
+      num_inference_steps: 28
+      add_processor: false
+  ft_edit:
+    pipeline: FTEditSD35Pipeline
+    parameters:
+      guidance_scale: 3.5
+      ly_ratio: 0.8
+      num_inference_steps: 25
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+      controller:
+        type: SD35AttentionReplace
+        prompts:
+        - ''
+        - ''
+        num_steps: 25
+        attn_ratio: 0.15
+        num_att_layers: 24
+  rf_flow_vanilla:
+    pipeline: RFVanillaSD35Pipeline
+    parameters:
+      inject_step: 2
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  fia_edit:
+    pipeline: RFFIAEditSD35Pipeline
+    parameters:
+      inject_step: 0
+      noise_coeff:
+      - 1.0
+      - 0
+      - 0
+      scale_coeff: 0.9
+      offset_coeff: 0.8
+      num_inference_steps: 10
+      num_average_steps: 1
+      source_guidance_scale: 1.0
+      target_guidance_scale: 3.5
+      interpolate_start_step: 0
+      interpolate_end_step: 8
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  fsi_edit:
+    pipeline: RFFSIEditSD35Pipeline
+    parameters:
+      inject_step: 2
+      noise_coeff:
+      - 0.1
+      - 0.1
+      - 0.8
+      scale_coeff: 0.3
+      smooth_coeff: 0.999
+      guidance_scale: 3.5
+      num_inference_steps: 10
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit:
+    pipeline: SMART_EditEditSD35Pipeline
+    model_path: stabilityai/stable-diffusion-3-medium
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      source_guidance_scale: 1.0
+      target_guidance_scale: 3.5
+      interpolate_start_step: 0
+      interpolate_end_step: 24
+      num_average_steps: 1
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit_dna:
+    pipeline: SMART_EditDNAEditSD35Pipeline
+    parameters:
+      source_guidance_scale: 1.0
+      target_guidance_scale: 3.5
+      start_timestep: 4
+      inject_step: 4
+      token_indices: 2
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit_fireflow:
+    pipeline: SMART_EditFireFlowEditSD35Pipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      with_second_order: true
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit_rf_solver:
+    pipeline: SMART_EditRFSolverEditSD35Pipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      with_second_order: true
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit_rf_inversion:
+    pipeline: SMART_EditRFInversionEditSD35Pipeline
+    parameters:
+      inject_step: 4
+      start_timestep: 0
+      stop_timestep: 0.35
+      gamma: 0.9
+      token_indices: 2
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit_vanilla:
+    pipeline: SMART_EditVanillaSD35Pipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit_ft:
+    pipeline: SMART_EditFTEditSD35Pipeline
+    parameters:
+      num_inference_steps: 28
+      fixed_point_steps: 1
+      skip_steps: 0
+      ly_ratio: 0.8
+      token_indices: 2
+      guidance_scale: 3.5
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+      controller:
+        type: SD35AttentionReplace
+        prompts:
+        - ''
+        - ''
+        num_steps: 28
+        attn_ratio: 0.15
+        num_att_layers: 24
+  smart_edit_fia:
+    pipeline: SMART_EditFIAEditSD35Pipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      noise_coeff:
+      - 1.0
+      - 0
+      - 0
+      scale_coeff: 0.9
+      offset_coeff: 0.8
+      num_inference_steps: 28
+      num_average_steps: 1
+      source_guidance_scale: 1.0
+      target_guidance_scale: 3.5
+      interpolate_start_step: 0
+      interpolate_end_step: 22
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
+  smart_edit_fsi:
+    pipeline: SMART_EditFSIEditSD35Pipeline
+    parameters:
+      inject_step: 4
+      token_indices: 2
+      noise_coeff:
+      - 0.1
+      - 0.1
+      - 0.8
+      scale_coeff: 0.3
+      smooth_coeff: 0.999
+      guidance_scale: 3.5
+      num_inference_steps: 28
+      add_processor:
+        after_layer: 13
+        before_layer: 23
+        filter_name: attn
