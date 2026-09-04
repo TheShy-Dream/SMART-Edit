@@ -20,7 +20,7 @@ methods:
       num_inference_steps: 8
       with_second_order: true
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   rf_inversion:
@@ -58,7 +58,7 @@ methods:
       ly_ratio: 0.8
       num_inference_steps: 25
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
       controller:
@@ -76,7 +76,7 @@ methods:
       guidance_scale: 3.5
       num_inference_steps: 28
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   fia_edit:
@@ -96,7 +96,7 @@ methods:
       interpolate_start_step: 0
       interpolate_end_step: 8
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   fsi_edit:
@@ -112,7 +112,7 @@ methods:
       guidance_scale: 3.5
       num_inference_steps: 10
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit:
@@ -128,7 +128,7 @@ methods:
       num_average_steps: 1
       num_inference_steps: 28
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit_dna:
@@ -141,7 +141,7 @@ methods:
       token_indices: 2
       num_inference_steps: 28
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit_fireflow:
@@ -153,7 +153,7 @@ methods:
       num_inference_steps: 28
       with_second_order: true
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit_rf_solver:
@@ -165,7 +165,7 @@ methods:
       num_inference_steps: 28
       with_second_order: true
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit_rf_inversion:
@@ -179,7 +179,7 @@ methods:
       guidance_scale: 3.5
       num_inference_steps: 28
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit_vanilla:
@@ -190,7 +190,7 @@ methods:
       guidance_scale: 3.5
       num_inference_steps: 28
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit_ft:
@@ -203,7 +203,7 @@ methods:
       token_indices: 2
       guidance_scale: 3.5
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
       controller:
@@ -232,7 +232,7 @@ methods:
       interpolate_start_step: 0
       interpolate_end_step: 22
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
   smart_edit_fsi:
@@ -249,6 +249,6 @@ methods:
       guidance_scale: 3.5
       num_inference_steps: 28
       add_processor:
-        after_layer: 13
+        after_layer: 12
         before_layer: 23
         filter_name: attn
