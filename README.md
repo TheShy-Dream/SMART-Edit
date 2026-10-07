@@ -92,7 +92,20 @@ Core code:
 
 ## 📝 Citation
 
-Citation for SMART-Edit will be added once the paper is published. If you use this code, please cite the original works of the integrated methods listed above.
+If you find SMART-Edit useful in your research, please consider citing our paper:
+
+```bibtex
+@article{chen2026smart,
+  title={SMART-Edit: Spectral Mutual Attention Refinement and fusion for precise training-free image editing},
+  author={Chen, Jili and Tu, Yaxin and Huang, Qionghao and Wang, Xizhe and Huang, Xiaodi and Huang, Changqin},
+  journal={Pattern Recognition},
+  pages={115025},
+  year={2026},
+  publisher={Elsevier}
+}
+```
+
+If you use this code, please also cite the original works of the integrated methods listed above.
 
 ---
 
